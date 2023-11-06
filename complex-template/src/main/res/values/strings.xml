@@ -17,4 +17,8 @@
     <string name="cb">cb</string>
     <string name="left">种类</string>
     <string name="element">元素</string>
+    <string name="picture">picture</string>
+    <string name="title">标题</string>
+    <string name="description">描述</string>
+    <string name="money">money</string>
 </resources>

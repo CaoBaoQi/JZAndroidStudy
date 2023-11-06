@@ -1,7 +1,6 @@
 package jz.cbq.android.complex_template.fragment;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.adapter.home.LeftAdapter;
 import jz.cbq.android.complex_template.adapter.home.RightAdapter;
+import jz.cbq.android.complex_template.entity.ProductInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment {
     private RightAdapter rightAdapter;
 
     private List<String> leftList = new ArrayList<>();
+    private List<ProductInfo> rightList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -44,12 +45,18 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         leftList.add("CBQ");
         leftList.add("CB");
         leftAdapter = new LeftAdapter(leftList);
         left.setAdapter(leftAdapter);
 
         leftAdapter.setLeftListOnClickItemListener(position -> leftAdapter.setCurrentIndex(position));
+
+        rightList.add(new ProductInfo(1, R.drawable.avatar, "CBQ", "I am cbq", 100));
+        rightList.add(new ProductInfo(2, R.drawable.avatar, "CB", "I am cb", 200));
+        rightAdapter = new RightAdapter(rightList);
+        right.setAdapter(rightAdapter);
 
     }
 }
