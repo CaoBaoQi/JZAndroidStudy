@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * 校验表单数据
+     * 校验注册表单
      * @param v view
      */
     private void validateForm(View v) {

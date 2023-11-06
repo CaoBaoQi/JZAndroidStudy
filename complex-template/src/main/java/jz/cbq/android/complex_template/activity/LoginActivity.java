@@ -35,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(this::validateForm);
     }
 
+    /**
+     * 校验登录表单
+     * @param v view
+     */
     private void validateForm(View v) {
         String username = et_username.getText().toString();
         String pwd = et_pwd.getText().toString();
