@@ -4,6 +4,13 @@
     <string name="mine">我的</string>
     <string name="order">订单</string>
     <string name="car">购物车</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="JZ">晋中学院</string>
+    <string name="login">登录</string>
+    <string name="account">账户</string>
+    <string name="input_username">请输入用户名</string>
+    <string name="input_pwd">请输入密码</string>
+    <string name="does_not_register">还未注册？</string>
+    <string name="register">注册</string>
+    <string name="pwd">密码</string>
 </resources>
