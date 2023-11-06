@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 选中 Fragment
+     * @param position position
+     */
     private void selectedFragment(int position) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideFragment(transaction);
@@ -75,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    /**
+     * 隐藏 Fragment
+     * @param transaction transaction
+     */
     private void hideFragment(FragmentTransaction transaction) {
         if (home != null) {
             transaction.hide(home);
