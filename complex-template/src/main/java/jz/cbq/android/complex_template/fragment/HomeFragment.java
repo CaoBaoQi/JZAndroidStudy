@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.adapter.home.LeftAdapter;
 import jz.cbq.android.complex_template.adapter.home.RightAdapter;
-import jz.cbq.android.complex_template.entity.ProductInfo;
+import jz.cbq.android.complex_template.entity.DataService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class HomeFragment extends Fragment {
     private RightAdapter rightAdapter;
 
     private List<String> leftList = new ArrayList<>();
-    private List<ProductInfo> rightList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -51,12 +50,16 @@ public class HomeFragment extends Fragment {
         leftAdapter = new LeftAdapter(leftList);
         left.setAdapter(leftAdapter);
 
-        leftAdapter.setLeftListOnClickItemListener(position -> leftAdapter.setCurrentIndex(position));
-
-        rightList.add(new ProductInfo(1, R.drawable.avatar, "CBQ", "I am cbq", 100));
-        rightList.add(new ProductInfo(2, R.drawable.avatar, "CB", "I am cb", 200));
-        rightAdapter = new RightAdapter(rightList);
+        rightAdapter = new RightAdapter();
+        rightAdapter.setDataList(DataService.getListData(0));
         right.setAdapter(rightAdapter);
+
+        leftAdapter.setLeftListOnClickItemListener(position -> {
+            leftAdapter.setCurrentIndex(position);
+
+            rightAdapter.setDataList(DataService.getListData(position));
+        });
+
 
     }
 }

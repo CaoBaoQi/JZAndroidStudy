@@ -1,5 +1,6 @@
 package jz.cbq.android.complex_template.adapter.home;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public class LeftAdapter extends RecyclerView.Adapter<LeftAdapter.Holder> {
 
-    private List<String> dataList = new ArrayList<>();
+    private final List<String> dataList;
     private int currentIndex = 0;
     private LeftListOnClickItemListener leftListOnClickItemListener;
 
@@ -33,6 +34,7 @@ public class LeftAdapter extends RecyclerView.Adapter<LeftAdapter.Holder> {
         this.leftListOnClickItemListener = leftListOnClickItemListener;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
         notifyDataSetChanged();

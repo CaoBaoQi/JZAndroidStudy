@@ -26,8 +26,10 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
 
     private List<ProductInfo> dataList = new ArrayList<>();
 
-    public RightAdapter(List<ProductInfo> dataList) {
+    @SuppressLint("NotifyDataSetChanged")
+    public void setDataList(List<ProductInfo> dataList) {
         this.dataList = dataList;
+        notifyDataSetChanged();
     }
 
     @NonNull
