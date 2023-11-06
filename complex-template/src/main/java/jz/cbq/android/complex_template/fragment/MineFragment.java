@@ -6,13 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import jz.cbq.android.complex_template.R;
+import org.jetbrains.annotations.NotNull;
 
 
 public class MineFragment extends Fragment {
+
+    private View rootView;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+
+        if (rootView == null){
+            rootView = inflater.inflate(R.layout.fragment_mine, container, false);
+        }
+
+        return rootView;
     }
 }
