@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(username) && TextUtils.isEmpty(pwd)) {
             Toast.makeText(this, "请输入用户名或密码", Toast.LENGTH_SHORT).show();
         } else {
-            String shared_username = shared.getString("username", "");
-            String shared_pwd = shared.getString("pwd", "");
+            String shared_username = shared.getString("username", "cbq");
+            String shared_pwd = shared.getString("pwd", "cb");
 
             if (username.equals(shared_username) && pwd.equals(shared_pwd)) {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();

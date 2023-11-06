@@ -58,6 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:hint="@string/input_username"
+                    android:text="@string/cbq"
                     android:textSize="14sp"
                     android:background="@null" android:autofillHints="" android:inputType="textAutoComplete"/>
 
@@ -84,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
+                    android:text="@string/cb"
                     android:hint="@string/input_pwd"
 
                     android:textSize="14sp"

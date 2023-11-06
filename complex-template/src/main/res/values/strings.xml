@@ -13,4 +13,6 @@
     <string name="does_not_register">还未注册？</string>
     <string name="register">注册</string>
     <string name="pwd">密码</string>
+    <string name="cbq">cbq</string>
+    <string name="cb">cb</string>
 </resources>
