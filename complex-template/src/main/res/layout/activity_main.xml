@@ -10,6 +10,7 @@
 
     <FrameLayout
             android:id="@+id/content"
+            android:background="#f9f4dc"
             android:layout_above="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
