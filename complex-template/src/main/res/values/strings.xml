@@ -15,4 +15,6 @@
     <string name="pwd">密码</string>
     <string name="cbq">cbq</string>
     <string name="cb">cb</string>
+    <string name="left">种类</string>
+    <string name="element">元素</string>
 </resources>
