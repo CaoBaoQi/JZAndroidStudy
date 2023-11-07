@@ -25,4 +25,9 @@
     <string name="product_details">商品详情</string>
     <string name="i_am_cbq_1">I am cbq-1</string>
     <string name="buy_car">加入到购物车</string>
+    <string name="total">合计</string>
+    <string name="buy">结算</string>
+    <string name="add">+</string>
+    <string name="sub">-</string>
+    <string name="num">10</string>
 </resources>
