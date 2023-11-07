@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.adapter.car.CarAdapter;
 import jz.cbq.android.complex_template.db.CarDbHelper;
+import jz.cbq.android.complex_template.db.OrderDbHelper;
 import jz.cbq.android.complex_template.entity.CarInfo;
 import jz.cbq.android.complex_template.entity.UserInfo;
 import org.jetbrains.annotations.NotNull;
@@ -89,6 +90,15 @@ public class CarFragment extends Fragment {
         });
 
         btn_buy.setOnClickListener(v -> {
+            UserInfo userInfo = UserInfo.getCurrentUserInfo();
+
+            if (userInfo != null) {
+                List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).findAll(userInfo.getUsername());
+                OrderDbHelper.getInstance(getActivity()).insertByAll(carInfoList, "文华街 199 号", "19510201902");
+
+                carInfoList.forEach(carInfo -> CarDbHelper.getInstance(getActivity()).delete(carInfo.getCar_id() + ""));
+            }
+            loadData();
 
         });
 
@@ -106,7 +116,6 @@ public class CarFragment extends Fragment {
 
         if (userInfo != null) {
             List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).findAll(userInfo.getUsername());
-            Log.d(userInfo.getUsername(), carInfoList.toString());
             carAdapter.setDataList(carInfoList);
             setTotalData(carInfoList);
         }
