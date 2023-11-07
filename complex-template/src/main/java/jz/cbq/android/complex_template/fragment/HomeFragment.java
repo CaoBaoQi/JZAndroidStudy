@@ -1,5 +1,6 @@
 package jz.cbq.android.complex_template.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.activity.ProductDetailsActivity;
 import jz.cbq.android.complex_template.adapter.home.LeftAdapter;
 import jz.cbq.android.complex_template.adapter.home.RightAdapter;
 import jz.cbq.android.complex_template.entity.DataService;
+import jz.cbq.android.complex_template.entity.ProductInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -53,6 +56,12 @@ public class HomeFragment extends Fragment {
         rightAdapter = new RightAdapter();
         rightAdapter.setDataList(DataService.getListData(0));
         right.setAdapter(rightAdapter);
+
+        rightAdapter.setItemClickListener((productInfo, position) -> {
+            Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+            intent.putExtra("productInfo", productInfo);
+            startActivity(intent);
+        });
 
         leftAdapter.setLeftListOnClickItemListener(position -> {
             leftAdapter.setCurrentIndex(position);

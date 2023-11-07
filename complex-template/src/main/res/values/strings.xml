@@ -22,4 +22,7 @@
     <string name="description">描述</string>
     <string name="money">money</string>
     <string name="save_pwd">记住密码</string>
+    <string name="product_details">商品详情</string>
+    <string name="i_am_cbq_1">I am cbq-1</string>
+    <string name="buy_car">加入到购物车</string>
 </resources>

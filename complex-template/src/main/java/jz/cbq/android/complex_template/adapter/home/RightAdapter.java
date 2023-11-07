@@ -23,6 +23,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
+    private onItemClickListener itemClickListener;
 
     private List<ProductInfo> dataList = new ArrayList<>();
 
@@ -30,6 +31,10 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
     public void setDataList(List<ProductInfo> dataList) {
         this.dataList = dataList;
         notifyDataSetChanged();
+    }
+
+    public void setItemClickListener(onItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -43,13 +48,16 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull @NotNull Holder holder, int position) {
-        ProductInfo info = dataList.get(position);
+        ProductInfo productInfo = dataList.get(position);
 
-        holder.img.setImageResource(info.getImg());
-        holder.title.setText(info.getTitle());
-        holder.description.setText(info.getDescription());
+        holder.img.setImageResource(productInfo.getImg());
+        holder.title.setText(productInfo.getTitle());
+        holder.description.setText(productInfo.getDescription());
 
-        holder.price.setText(info.getPrice() + " ");
+        holder.price.setText(productInfo.getPrice() + " ");
+
+        holder.itemView.setOnClickListener(v -> itemClickListener.onItemClick(productInfo,position));
+
     }
 
     @Override
@@ -71,6 +79,10 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
             description = itemView.findViewById(R.id.tx_description);
             price = itemView.findViewById(R.id.tx_price);
         }
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(ProductInfo productInfo, int position);
     }
 }
 
