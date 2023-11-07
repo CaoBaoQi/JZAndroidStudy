@@ -1,8 +1,6 @@
 package jz.cbq.android.complex_template.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * 用户信息
@@ -31,4 +29,9 @@ public class UserInfo {
      * nickname
      */
     private String nickname;
+
+    @Getter
+    @Setter
+    public static UserInfo CurrentUserInfo;
+
 }

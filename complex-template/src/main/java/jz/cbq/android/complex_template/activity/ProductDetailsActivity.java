@@ -9,6 +9,7 @@ import android.os.Bundle;
 import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.db.CarDbHelper;
 import jz.cbq.android.complex_template.entity.ProductInfo;
+import jz.cbq.android.complex_template.entity.UserInfo;
 
 
 /**
@@ -45,14 +46,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.product_details_activity_buy_car).setOnClickListener(v -> {
-            int count = CarDbHelper.getInstance(ProductDetailsActivity.this)
-                    .addCar("cbq", productInfo.getId(), productInfo.getImg(), productInfo.getTitle(), productInfo.getDescription(), productInfo.getPrice());
+            UserInfo userInfo = UserInfo.getCurrentUserInfo();
 
-            if (count >0){
-                Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(this, "添加失败", Toast.LENGTH_SHORT).show();
+            if (userInfo != null) {
+                int count = CarDbHelper.getInstance(ProductDetailsActivity.this)
+                        .addCar(userInfo.getUsername(), productInfo.getId(), productInfo.getImg(), productInfo.getTitle(), productInfo.getDescription(), productInfo.getPrice());
+
+                if (count > 0) {
+                    Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "添加失败", Toast.LENGTH_SHORT).show();
+                }
             }
+
+
         });
 
     }

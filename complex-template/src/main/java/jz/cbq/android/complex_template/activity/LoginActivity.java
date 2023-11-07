@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("pwd", pwd);
                     editor.apply();
 
+                    UserInfo.setCurrentUserInfo(userInfo);
 
                     Toast.makeText(this, "登录成功,欢迎您 " + username, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));

@@ -17,6 +17,7 @@ import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.adapter.car.CarAdapter;
 import jz.cbq.android.complex_template.db.CarDbHelper;
 import jz.cbq.android.complex_template.entity.CarInfo;
+import jz.cbq.android.complex_template.entity.UserInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -101,9 +102,15 @@ public class CarFragment extends Fragment {
     }
 
     public void loadData() {
-        List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).findAll("cbq");
-        Log.d("cbq", carInfoList.toString());
-        carAdapter.setDataList(carInfoList);
-        setTotalData(carInfoList);
+        UserInfo userInfo = UserInfo.getCurrentUserInfo();
+
+        if (userInfo != null) {
+            List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).findAll(userInfo.getUsername());
+            Log.d(userInfo.getUsername(), carInfoList.toString());
+            carAdapter.setDataList(carInfoList);
+            setTotalData(carInfoList);
+        }
+
+
     }
 }
