@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * LeftAdapter
+ * 主页-left
  *
- * @author Cola777jz
+ * @author CBQ
  * @date 2023/11/6 22:54
  * @since 1.0.0
  */
@@ -77,7 +77,7 @@ public class LeftAdapter extends RecyclerView.Adapter<LeftAdapter.Holder> {
 
         public Holder(@NonNull @NotNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.name);
+            tv_name = itemView.findViewById(R.id.left_list_item_tx_name);
         }
     }
 

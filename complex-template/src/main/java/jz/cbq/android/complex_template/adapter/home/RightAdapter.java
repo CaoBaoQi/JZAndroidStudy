@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RightAdapter
+ * 主页-right
  *
- * @author Cola777jz
+ * @author CBQ
  * @date 2023/11/6 22:54
  * @since 1.0.0
  */
@@ -74,10 +74,10 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.Holder> {
 
         public Holder(@NonNull @NotNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.iv_img);
-            title = itemView.findViewById(R.id.tx_title);
-            description = itemView.findViewById(R.id.tx_description);
-            price = itemView.findViewById(R.id.tx_price);
+            img = itemView.findViewById(R.id.right_list_item_iv_img);
+            title = itemView.findViewById(R.id.right_list_item_tx_title);
+            description = itemView.findViewById(R.id.right_list_item_tx_description);
+            price = itemView.findViewById(R.id.right_list_item_tx_price);
         }
     }
 

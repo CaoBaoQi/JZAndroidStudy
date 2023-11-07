@@ -19,6 +19,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 主页
+ *
+ * @author CBQ
+ * @date 2023/11/7 0:13
+ * @since 1.0.0
+ */
 public class HomeFragment extends Fragment {
 
     private View rootView;
@@ -37,8 +44,8 @@ public class HomeFragment extends Fragment {
             rootView = inflater.inflate(R.layout.fragment_home, container, false);
         }
 
-        left = rootView.findViewById(R.id.leftRecyclerView);
-        right = rootView.findViewById(R.id.rightRecyclerView);
+        left = rootView.findViewById(R.id.home_fragment_leftRecyclerView);
+        right = rootView.findViewById(R.id.home_fragment_rightRecyclerView);
 
 
         return rootView;

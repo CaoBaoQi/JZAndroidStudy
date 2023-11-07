@@ -1,6 +1,5 @@
 package jz.cbq.android.complex_template.activity;
 
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,13 @@ import android.os.Bundle;
 import jz.cbq.android.complex_template.R;
 import jz.cbq.android.complex_template.db.UserDbHelper;
 
+/**
+ * 注册
+ *
+ * @author CBQ
+ * @date 2023/11/6 22:54
+ * @since 1.0.0
+ */
 public class RegisterActivity extends AppCompatActivity {
 
 
@@ -22,13 +28,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-        et_username = findViewById(R.id.et_username);
-        et_pwd = findViewById(R.id.et_pwd);
+        et_username = findViewById(R.id.register_activity_et_username);
+        et_pwd = findViewById(R.id.register_activity_et_pwd);
 
-        View back = findViewById(R.id.back);
+        View back = findViewById(R.id.register_activity_toolbar);
         back.setOnClickListener(v -> finish());
 
-        Button btn_register = findViewById(R.id.btn_register);
+        Button btn_register = findViewById(R.id.register_activity_btn_register);
 
         btn_register.setOnClickListener(this::validateForm);
     }

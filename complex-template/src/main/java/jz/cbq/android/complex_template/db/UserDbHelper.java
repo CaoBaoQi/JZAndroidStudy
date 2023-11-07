@@ -13,18 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * UserDbHelper
+ * user DB 数据库
  *
- * @author Cola777jz
+ * @author CBQ
  * @date 2023/11/7 13:53
  * @since 1.0.0
  */
 public class UserDbHelper extends SQLiteOpenHelper {
     private static UserDbHelper sHelper;
-    private static final String DB_NAME = "user.db";   //数据库名
-    private static final int VERSION = 1;    //版本号
+    /**
+     * 数据库名
+     */
+    private static final String DB_NAME = "user.db";
+    /**
+     * 版本号
+     */
+    private static final int VERSION = 1;
 
-    //必须实现其中一个构方法
     public UserDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -44,7 +49,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //创建 user_table 表
+        // 创建 user_table 表
         db.execSQL("create table user_table(user_id integer primary key autoincrement, " +
                 "username text," +
                 "password text," +
@@ -66,15 +71,14 @@ public class UserDbHelper extends SQLiteOpenHelper {
      * @return count
      */
     public int register(String username, String password, String nickname) {
-        //获取 SQLiteDatabase 实例
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        //填充占位符
+
         values.put("username", username);
         values.put("password", password);
         values.put("nickname", nickname);
         String nullColumnHack = "values(null,?,?,?)";
-        //执行
+
         int insert = (int) db.insert("user_table", nullColumnHack, values);
         db.close();
         return insert;
@@ -85,7 +89,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
      */
     @SuppressLint("Range")
     public UserInfo login(String username) {
-        //获取 SQLiteDatabase 实例
         SQLiteDatabase db = getReadableDatabase();
         UserInfo userInfo = null;
         String sql = "select user_id,username,password,nickname  from user_table where username=?";
@@ -108,7 +111,6 @@ public class UserDbHelper extends SQLiteOpenHelper {
      */
     @SuppressLint("Range")
     public List<UserInfo> queryRegisterListData() {
-        //获取 SQLiteDatabase 实例
         SQLiteDatabase db = getReadableDatabase();
         List<UserInfo> list = new ArrayList<>();
         String sql = "select _id,username,password,register_type  from user_table";
@@ -130,12 +132,12 @@ public class UserDbHelper extends SQLiteOpenHelper {
      */
     public int updatePwd(int user_id, String password) {
         SQLiteDatabase db = getWritableDatabase();
-        // 填充占位符
+
         ContentValues values = new ContentValues();
         values.put("password", password);
-        // 执行SQL
+
         int update = db.update("user_table", values, " user_id=?", new String[]{user_id + ""});
-        // 关闭数据库连接
+
         db.close();
         return update;
 
@@ -145,11 +147,8 @@ public class UserDbHelper extends SQLiteOpenHelper {
      * 根据用户 唯一 user_id 删除用户
      */
     public int delete(String user_id) {
-        //获取 SQLiteDatabase 实例
         SQLiteDatabase db = getWritableDatabase();
-        // 执行 SQL
         int delete = db.delete("user_table", " user_id=?", new String[]{user_id});
-        // 关闭数据库连接
         db.close();
         return delete;
     }

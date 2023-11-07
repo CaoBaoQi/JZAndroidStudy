@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * UserInfo
+ * 用户信息
  *
- * @author Cola777jz
+ * @author CBQ
  * @date 2023/11/7 13:56
  * @since 1.0.0
  */
@@ -15,8 +15,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo {
+    /**
+     * id
+     */
     private Integer user_id;
+    /**
+     * username
+     */
     private String username;
+    /**
+     * password
+     */
     private String password;
+    /**
+     * nickname
+     */
     private String nickname;
 }

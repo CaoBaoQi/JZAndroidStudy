@@ -54,7 +54,7 @@
                     android:contentDescription="@string/account"/>
 
             <EditText
-                    android:id="@+id/et_username"
+                    android:id="@+id/login_activity_et_username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -82,7 +82,7 @@
                     android:contentDescription="@string/pwd"/>
 
             <EditText
-                    android:id="@+id/et_pwd"
+                    android:id="@+id/login_activity_et_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content">
 
             <CheckBox
-                    android:id="@+id/cb_save_pwd"
+                    android:id="@+id/login_activity_cb_save_pwd"
                     android:layout_width="wrap_content"
                     android:text="@string/save_pwd"
                     android:textColor="@color/my_light_primary"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"/>
 
             <TextView
-                    android:id="@+id/tx_register"
+                    android:id="@+id/login_activity_tx_register"
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         </RelativeLayout>
 
         <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/login_activity_btn_login"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:text="@string/login"

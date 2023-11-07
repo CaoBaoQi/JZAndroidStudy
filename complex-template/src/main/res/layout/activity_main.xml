@@ -9,14 +9,14 @@
         tools:context=".MainActivity">
 
     <FrameLayout
-            android:id="@+id/content"
+            android:id="@+id/main_activity_content"
             android:background="#f9f4dc"
-            android:layout_above="@+id/bottomNavigationView"
+            android:layout_above="@+id/main_activity_bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
+            android:id="@+id/main_activity_bottomNavigationView"
             app:menu="@menu/navigation"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"

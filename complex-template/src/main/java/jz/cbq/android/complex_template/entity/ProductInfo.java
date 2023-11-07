@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * ProductInfo
+ * 商品信息
  *
- * @author Cola777jz
+ * @author CBQ
  * @date 2023/11/6 23:50
  * @since 1.0.0
  */
@@ -17,9 +17,24 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductInfo implements Serializable {
+    /**
+     * id
+     */
     private int id;
+    /**
+     * img
+     */
     private int img;
+    /**
+     * title
+     */
     private String title;
+    /**
+     * description
+     */
     private String description;
+    /**
+     * price
+     */
     private int price;
 }

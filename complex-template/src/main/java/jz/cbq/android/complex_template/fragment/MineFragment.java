@@ -8,7 +8,13 @@ import android.view.ViewGroup;
 import jz.cbq.android.complex_template.R;
 import org.jetbrains.annotations.NotNull;
 
-
+/**
+ * 我的
+ *
+ * @author CBQ
+ * @date 2023/11/7 0:13
+ * @since 1.0.0
+ */
 public class MineFragment extends Fragment {
 
     private View rootView;
