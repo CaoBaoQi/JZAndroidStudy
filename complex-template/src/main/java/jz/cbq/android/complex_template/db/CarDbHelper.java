@@ -95,7 +95,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             String nullColumnHack = "values(null,?,?,?,?,?,?,?)";
 
             int insert = (int) db.insert("car_table", nullColumnHack, values);
-//            db.close();
+            db.close();
             return insert;
         } else {
             return updateProduct(carInfo.getCar_id(), carInfo);
@@ -141,9 +141,28 @@ public class CarDbHelper extends SQLiteOpenHelper {
 
         int update = db.update("car_table", values, " car_id=?", new String[]{car_id + ""});
 
-//        db.close();
+        db.close();
         return update;
 
+    }
+
+    /**
+     * 根据 id 修改购物车商品数量
+     */
+    public int updateProductSub(int car_id, CarInfo carInfo) {
+
+        if (carInfo.getProduct_count() >= 2) {
+            SQLiteDatabase db = getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put("product_count", carInfo.getProduct_count() - 1);
+
+            int update = db.update("car_table", values, " car_id=?", new String[]{car_id + ""});
+
+            db.close();
+            return update;
+        }
+        return 0;
     }
 
     /**
@@ -166,7 +185,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             carInfo = new CarInfo(car_id, username, product_id, product_img, product_title, product_description, product_price, product_count);
         }
         cursor.close();
-//        db.close();
+        db.close();
         return carInfo;
     }
 
@@ -191,7 +210,17 @@ public class CarDbHelper extends SQLiteOpenHelper {
             list.add(new CarInfo(car_id, username, product_id, product_img, product_title, product_description, product_price, product_count));
         }
         cursor.close();
-//        db.close();
+        db.close();
         return list;
+    }
+
+    /**
+     * 根据 car_id 删除
+     */
+    public int delete(String car_id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int delete = db.delete("car_table", " car_id=?", new String[]{car_id});
+        db.close();
+        return delete;
     }
 }

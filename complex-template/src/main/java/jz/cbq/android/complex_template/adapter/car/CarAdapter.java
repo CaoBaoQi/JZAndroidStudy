@@ -21,12 +21,18 @@ import java.util.List;
  * @since 1.0.0
  */
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.Holder> {
-    private  List<CarInfo> dataList;
+    private List<CarInfo> dataList;
+    private CarAdapterOnItemClickListener carAdapterOnItemClickListener;
 
     public void setDataList(List<CarInfo> dataList) {
         this.dataList = dataList;
         notifyDataSetChanged();
     }
+
+    public void setCarAdapterOnItemClickListener(CarAdapterOnItemClickListener carAdapterOnItemClickListener) {
+        this.carAdapterOnItemClickListener = carAdapterOnItemClickListener;
+    }
+
 
     @NonNull
     @NotNull
@@ -47,6 +53,24 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.Holder> {
         holder.product_price.setText(carInfo.getProduct_price() + "");
         holder.product_count.setText(carInfo.getProduct_count() + "");
 
+        holder.tx_add.setOnClickListener(v -> {
+            if (carAdapterOnItemClickListener != null) {
+                carAdapterOnItemClickListener.addOnClick(carInfo, position);
+            }
+        });
+
+        holder.tx_sub.setOnClickListener(v -> {
+            if (carAdapterOnItemClickListener != null) {
+                carAdapterOnItemClickListener.subOnClick(carInfo, position);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (carAdapterOnItemClickListener != null) {
+                carAdapterOnItemClickListener.deleteOnClick(carInfo, position);
+            }
+            return true;
+        });
 
 
     }
@@ -61,6 +85,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.Holder> {
         TextView product_title;
         TextView product_price;
         TextView product_count;
+        TextView tx_add;
+        TextView tx_sub;
 
 
         public Holder(@NonNull @NotNull View itemView) {
@@ -69,8 +95,16 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.Holder> {
             product_title = itemView.findViewById(R.id.car_list_item_tv_title);
             product_price = itemView.findViewById(R.id.car_list_item_tv_price);
             product_count = itemView.findViewById(R.id.car_list_item_tv_count);
+            tx_add = itemView.findViewById(R.id.car_list_item_tv_add);
+            tx_sub = itemView.findViewById(R.id.car_list_item_tv_sub);
         }
     }
 
+    public interface CarAdapterOnItemClickListener {
+        void addOnClick(CarInfo carInfo, int position);
 
+        void subOnClick(CarInfo carInfo, int position);
+
+        void deleteOnClick(CarInfo carInfo, int position);
+    }
 }
