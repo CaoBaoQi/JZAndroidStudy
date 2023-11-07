@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.add(R.id.main_activity_content, car);
             } else {
                 transaction.show(car);
+                car.loadData();
             }
         } else if (position == 2) {
             if (order == null) {

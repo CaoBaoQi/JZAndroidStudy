@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import jz.cbq.android.complex_template.entity.CarInfo;
+import jz.cbq.android.complex_template.entity.UserInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * car DB 数据库
@@ -77,7 +81,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     public int addCar(String username, Integer product_id, Integer product_img, String product_title, String product_description, Integer product_price) {
         CarInfo carInfo = loadCarInfoByUsernameAndProductId(username, product_id);
 
-        if (carInfo == null){
+        if (carInfo == null) {
             SQLiteDatabase db = getWritableDatabase();
             ContentValues values = new ContentValues();
 
@@ -93,7 +97,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             int insert = (int) db.insert("car_table", nullColumnHack, values);
 //            db.close();
             return insert;
-        }else {
+        } else {
             return updateProduct(carInfo.getCar_id(), carInfo);
         }
 
@@ -146,7 +150,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
      * 根据用户名查找购物信息
      */
     @SuppressLint("Range")
-    public CarInfo loadCarInfoByUsernameAndProductId(String username,Integer product_id) {
+    public CarInfo loadCarInfoByUsernameAndProductId(String username, Integer product_id) {
         SQLiteDatabase db = getReadableDatabase();
         CarInfo carInfo = null;
         String sql = "select car_id,username,product_id,product_img,product_title,product_description,product_price,product_count from car_table where username=? and product_id = ?";
@@ -164,5 +168,30 @@ public class CarDbHelper extends SQLiteOpenHelper {
         cursor.close();
 //        db.close();
         return carInfo;
+    }
+
+    /**
+     * 获取所有信息
+     */
+    @SuppressLint("Range")
+    public List<CarInfo> findAll(String username) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<CarInfo> list = new ArrayList<>();
+        String sql = "select car_id,username,product_id,product_img,product_title,product_description,product_price,product_count  from car_table where username = ?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            int car_id = cursor.getInt(cursor.getColumnIndex("car_id"));
+            int product_id = cursor.getInt(cursor.getColumnIndex("product_id"));
+            int product_img = cursor.getInt(cursor.getColumnIndex("product_img"));
+            String product_title = cursor.getString(cursor.getColumnIndex("product_title"));
+            String product_description = cursor.getString(cursor.getColumnIndex("product_description"));
+            int product_price = cursor.getInt(cursor.getColumnIndex("product_price"));
+            int product_count = cursor.getInt(cursor.getColumnIndex("product_count"));
+            list.add(new CarInfo(car_id, username, product_id, product_img, product_title, product_description, product_price, product_count));
+        }
+        cursor.close();
+//        db.close();
+        return list;
     }
 }

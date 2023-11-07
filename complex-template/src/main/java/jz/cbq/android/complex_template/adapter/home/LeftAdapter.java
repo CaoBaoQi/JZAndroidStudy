@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class LeftAdapter extends RecyclerView.Adapter<LeftAdapter.Holder> {
 
-    private final List<String> dataList;
+    private  List<String> dataList;
     private int currentIndex = 0;
     private LeftListOnClickItemListener leftListOnClickItemListener;
 
