@@ -74,7 +74,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
      * @param product_price       商品 price
      * @return count
      */
-    public int addCar(String username, Integer product_id, Integer product_img, String product_title, String product_description, Integer product_price, Integer product_count) {
+    public int addCar(String username, Integer product_id, Integer product_img, String product_title, String product_description, Integer product_price) {
         CarInfo carInfo = loadCarInfoByUsernameAndProductId(username, product_id);
 
         if (carInfo == null){
@@ -87,11 +87,11 @@ public class CarDbHelper extends SQLiteOpenHelper {
             values.put("product_title", product_title);
             values.put("product_description", product_description);
             values.put("product_price", product_price);
-            values.put("product_count", product_count);
+            values.put("product_count", 1);
             String nullColumnHack = "values(null,?,?,?,?,?,?,?)";
 
             int insert = (int) db.insert("car_table", nullColumnHack, values);
-            db.close();
+//            db.close();
             return insert;
         }else {
             return updateProduct(carInfo.getCar_id(), carInfo);
@@ -137,7 +137,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
 
         int update = db.update("car_table", values, " car_id=?", new String[]{car_id + ""});
 
-        db.close();
+//        db.close();
         return update;
 
     }
@@ -149,8 +149,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     public CarInfo loadCarInfoByUsernameAndProductId(String username,Integer product_id) {
         SQLiteDatabase db = getReadableDatabase();
         CarInfo carInfo = null;
-        String sql = "select car_id,username,product_id,product_img,product_title,product_description,product_price" +
-                "  from car_table where username=? and product_id = ?";
+        String sql = "select car_id,username,product_id,product_img,product_title,product_description,product_price,product_count from car_table where username=? and product_id = ?";
         String[] selectionArgs = {username, String.valueOf(product_id)};
         Cursor cursor = db.rawQuery(sql, selectionArgs);
         if (cursor.moveToNext()) {
@@ -163,7 +162,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             carInfo = new CarInfo(car_id, username, product_id, product_img, product_title, product_description, product_price, product_count);
         }
         cursor.close();
-        db.close();
+//        db.close();
         return carInfo;
     }
 }

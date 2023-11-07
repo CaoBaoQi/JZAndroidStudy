@@ -3,9 +3,11 @@ package jz.cbq.android.complex_template.activity;
 import android.annotation.SuppressLint;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.db.CarDbHelper;
 import jz.cbq.android.complex_template.entity.ProductInfo;
 
 
@@ -42,6 +44,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
             tx_price.setText(productInfo.getPrice() + " ");
         }
 
+        findViewById(R.id.product_details_activity_buy_car).setOnClickListener(v -> {
+            int count = CarDbHelper.getInstance(ProductDetailsActivity.this)
+                    .addCar("cbq", productInfo.getId(), productInfo.getImg(), productInfo.getTitle(), productInfo.getDescription(), productInfo.getPrice());
+
+            if (count >0){
+                Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "添加失败", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

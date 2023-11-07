@@ -27,9 +27,9 @@ public class DataService {
             list.add(new ProductInfo(3, R.drawable.avatar, "CBQ", "I am cbq-3", 300));
             list.add(new ProductInfo(4, R.drawable.avatar, "CBQ", "I am cbq-4", 400));
         } else {
-            list.add(new ProductInfo(1, R.drawable.avatar, "CB", "I am cb-1", 100));
-            list.add(new ProductInfo(2, R.drawable.avatar, "CB", "I am cb-2", 200));
-            list.add(new ProductInfo(3, R.drawable.avatar, "CB", "I am cb-3", 300));
+            list.add(new ProductInfo(100, R.drawable.avatar, "CB", "I am cb-1", 100));
+            list.add(new ProductInfo(101, R.drawable.avatar, "CB", "I am cb-2", 200));
+            list.add(new ProductInfo(102, R.drawable.avatar, "CB", "I am cb-3", 300));
         }
         return list;
     }
