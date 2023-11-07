@@ -95,14 +95,29 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-                android:id="@+id/tx_register"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textColor="@color/my_light_primary"
-                android:text="@string/does_not_register"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <CheckBox
+                    android:id="@+id/cb_save_pwd"
+                    android:layout_width="wrap_content"
+                    android:text="@string/save_pwd"
+                    android:textColor="@color/my_light_primary"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tx_register"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    android:textColor="@color/my_light_primary"
+                    android:text="@string/does_not_register"/>
+        </RelativeLayout>
 
         <Button
                 android:id="@+id/btn_login"
