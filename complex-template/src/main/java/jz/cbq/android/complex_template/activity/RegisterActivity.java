@@ -9,19 +9,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.db.UserDbHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
 
     private EditText et_username, et_pwd;
-    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        shared = getSharedPreferences("user", MODE_PRIVATE);
 
         et_username = findViewById(R.id.et_username);
         et_pwd = findViewById(R.id.et_pwd);
@@ -36,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * 校验注册表单
+     *
      * @param v view
      */
     private void validateForm(View v) {
@@ -45,14 +45,16 @@ public class RegisterActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(username) && TextUtils.isEmpty(pwd)) {
             Toast.makeText(this, "请输入用户名或密码", Toast.LENGTH_SHORT).show();
         } else {
-            SharedPreferences.Editor editor = shared.edit();
-            editor.putString("username", username);
-            editor.putString("pwd", pwd);
 
-            editor.apply();
+            int count = UserDbHelper.getInstance(RegisterActivity.this).register(username, pwd, "TODO");
 
-            Toast.makeText(this, "注册成功请登录", Toast.LENGTH_SHORT).show();
-            finish();
+            if (count > 0) {
+                Toast.makeText(this, "注册成功请登录", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+
+
         }
     }
 }

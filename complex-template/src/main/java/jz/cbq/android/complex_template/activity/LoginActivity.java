@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import jz.cbq.android.complex_template.MainActivity;
 import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.db.UserDbHelper;
+import jz.cbq.android.complex_template.entity.UserInfo;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * 校验登录表单
+     *
      * @param v view
      */
     private void validateForm(View v) {
@@ -46,14 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(username) && TextUtils.isEmpty(pwd)) {
             Toast.makeText(this, "请输入用户名或密码", Toast.LENGTH_SHORT).show();
         } else {
-            String shared_username = shared.getString("username", "cbq");
-            String shared_pwd = shared.getString("pwd", "cb");
-
-            if (username.equals(shared_username) && pwd.equals(shared_pwd)) {
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            UserInfo userInfo = UserDbHelper.getInstance(LoginActivity.this).login(username);
+            if (!(userInfo == null)) {
+                if (username.equals(userInfo.getUsername()) && pwd.equals(userInfo.getPassword())) {
+                    Toast.makeText(this, "登录成功,欢迎您 " + username, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "未注册", Toast.LENGTH_SHORT).show();
             }
         }
     }
