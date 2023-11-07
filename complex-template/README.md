@@ -665,3 +665,455 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+# 三、Home 页面实现
+
+## XML
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <corners android:radius="15dp"/>
+    <stroke android:color="@color/my_light_primary" android:width="1dp"/>
+
+</shape>
+```
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+
+        <shape>
+            <solid android:color="#f9f4dc"/>
+        </shape>
+
+    </item>
+
+    <item android:top="10dp" android:bottom="10dp" android:right="96dp">
+
+        <shape>
+            <solid android:color="@color/my_light_primary"/>
+        </shape>
+
+    </item>
+
+</layer-list>
+```
+
+
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+
+        <shape>
+            <solid android:color="#f9f4dc"/>
+        </shape>
+
+    </item>
+
+</layer-list>
+```
+
+
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".fragment.HomeFragment">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/home"
+            app:titleTextColor="@color/white"
+            android:background="@color/my_light_primary"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginTop="65dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="100dp"
+                android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/leftRecyclerView"
+                    tools:listitem="@layout/left_list_item"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rightRecyclerView"
+                    tools:listitem="@layout/right_list_item"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</FrameLayout>
+```
+
+
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/name"
+            android:paddingStart="10dp"
+            android:layout_width="100dp"
+            android:text="@string/left"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+```
+
+
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/iv_img"
+                android:src="@drawable/avatar"
+                android:scaleType="centerCrop"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/picture"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:id="@+id/tx_title"
+                    android:layout_width="wrap_content"
+                    android:text="@string/title"
+                    android:singleLine="true"
+                    android:textColor="#333"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tx_description"
+                    android:layout_width="match_parent"
+                    android:text="@string/description"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:src="@drawable/baseline_currency_yen_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="4dp"
+                        android:contentDescription="@string/money"/>
+
+                <TextView
+                        android:id="@+id/tx_price"
+                        android:layout_width="wrap_content"
+                        android:textSize="20sp"
+                        android:text="100"
+                        android:textStyle="bold"
+                        android:textColor="@color/my_light_primary"
+                        android:layout_height="wrap_content" tools:ignore="HardcodedText"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+```
+
+## Java
+
+```java
+package jz.cbq.android.complex_template.adapter.home;
+
+import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import jz.cbq.android.complex_template.R;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * LeftAdapter
+ *
+ * @author Cola777jz
+ * @date 2023/11/6 22:54
+ * @since 1.0.0
+ */
+public class LeftAdapter extends RecyclerView.Adapter<LeftAdapter.Holder> {
+
+    private final List<String> dataList;
+    private int currentIndex = 0;
+    private LeftListOnClickItemListener leftListOnClickItemListener;
+
+    public LeftAdapter(List<String> dataList) {
+        this.dataList = dataList;
+    }
+
+    public void setLeftListOnClickItemListener(LeftListOnClickItemListener leftListOnClickItemListener) {
+        this.leftListOnClickItemListener = leftListOnClickItemListener;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setCurrentIndex(int currentIndex) {
+        this.currentIndex = currentIndex;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @NotNull
+    @Override
+    public Holder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_list_item, null);
+
+        return new Holder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull @NotNull Holder holder, int position) {
+        holder.tv_name.setText(dataList.get(position));
+
+        holder.itemView.setOnClickListener(v -> {
+            if (leftListOnClickItemListener != null) {
+                leftListOnClickItemListener.onItemClick(position);
+            }
+        });
+
+        if (currentIndex == position){
+            holder.itemView.setBackgroundResource(R.drawable.type_selector_bg);
+        }else {
+            holder.itemView.setBackgroundResource(R.drawable.type_selector_normal_bg);
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+
+    static class Holder extends RecyclerView.ViewHolder {
+        TextView tv_name;
+
+        public Holder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            tv_name = itemView.findViewById(R.id.name);
+        }
+    }
+
+
+    public interface LeftListOnClickItemListener {
+        void onItemClick(int position);
+    }
+
+}
+
+```
+
+
+
+```java
+package jz.cbq.android.complex_template.fragment;
+
+import android.os.Bundle;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
+import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.adapter.home.LeftAdapter;
+import jz.cbq.android.complex_template.adapter.home.RightAdapter;
+import jz.cbq.android.complex_template.entity.DataService;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HomeFragment extends Fragment {
+
+    private View rootView;
+    private RecyclerView left, right;
+
+    private LeftAdapter leftAdapter;
+    private RightAdapter rightAdapter;
+
+    private List<String> leftList = new ArrayList<>();
+
+    @Override
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        }
+
+        left = rootView.findViewById(R.id.leftRecyclerView);
+        right = rootView.findViewById(R.id.rightRecyclerView);
+
+
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        leftList.add("CBQ");
+        leftList.add("CB");
+        leftAdapter = new LeftAdapter(leftList);
+        left.setAdapter(leftAdapter);
+
+        rightAdapter = new RightAdapter();
+        rightAdapter.setDataList(DataService.getListData(0));
+        right.setAdapter(rightAdapter);
+
+        leftAdapter.setLeftListOnClickItemListener(position -> {
+            leftAdapter.setCurrentIndex(position);
+
+            rightAdapter.setDataList(DataService.getListData(position));
+        });
+
+
+    }
+}
+```
+
+
+
+```java
+package jz.cbq.android.complex_template.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * ProductInfo
+ *
+ * @author Cola777jz
+ * @date 2023/11/6 23:50
+ * @since 1.0.0
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProductInfo {
+    private int id;
+    private int img;
+    private String title;
+    private String description;
+    private int price;
+}
+
+```
+
+
+
+```java
+package jz.cbq.android.complex_template.entity;
+
+import jz.cbq.android.complex_template.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * DataService
+ *
+ * @author Cola777jz
+ * @date 2023/11/7 0:13
+ * @since 1.0.0
+ */
+public class DataService {
+
+    /**
+     * 根据 position 获取 list
+     * @param position position
+     * @return list
+     */
+    public static List<ProductInfo> getListData(int position) {
+        List<ProductInfo> list = new ArrayList<>();
+        if (position == 0) {
+            list.add(new ProductInfo(1, R.drawable.avatar, "CBQ", "I am cbq-1", 100));
+            list.add(new ProductInfo(2, R.drawable.avatar, "CBQ", "I am cbq-2", 200));
+            list.add(new ProductInfo(3, R.drawable.avatar, "CBQ", "I am cbq-3", 300));
+            list.add(new ProductInfo(4, R.drawable.avatar, "CBQ", "I am cbq-4", 400));
+        } else {
+            list.add(new ProductInfo(1, R.drawable.avatar, "CB", "I am cb-1", 100));
+            list.add(new ProductInfo(2, R.drawable.avatar, "CB", "I am cb-2", 200));
+            list.add(new ProductInfo(3, R.drawable.avatar, "CB", "I am cb-3", 300));
+        }
+        return list;
+    }
+}
+
+```
+
+
+
