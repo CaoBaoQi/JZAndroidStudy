@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

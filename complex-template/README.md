@@ -1,6 +1,20 @@
 # Complex-Template
 
-> 模板搭建 
+> 安卓项目模板搭建 
+
+## Features
+
+- [x] 底部导航栏 （主页、购物车、订单、我的）
+- [x] SQLite + SP （登录、注册、记住我）
+
+## Version
+
+| 工具   | 版本     |
+| ------ | -------- |
+| IDEA   | 2023.2.+ |
+| JDK    | 17       |
+| Gradle | 8.x      |
+| API    | 30 (R)   |
 
 # 一、底部导航栏（Bottom）
 
