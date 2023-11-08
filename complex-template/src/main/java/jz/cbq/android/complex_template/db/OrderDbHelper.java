@@ -1,17 +1,21 @@
 package jz.cbq.android.complex_template.db;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import jz.cbq.android.complex_template.entity.CarInfo;
+import jz.cbq.android.complex_template.entity.OrderInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * OrderDbHelper
+ * order DB 数据库
  *
  * @author CBQ
  * @date 2023/11/7 21:56
@@ -66,9 +70,10 @@ public class OrderDbHelper extends SQLiteOpenHelper {
 
     /**
      * 批量插入
-     * @param list list
+     *
+     * @param list    list
      * @param address address
-     * @param mobile mobile
+     * @param mobile  mobile
      */
     public void insertByAll(List<CarInfo> list, String address, String mobile) {
         SQLiteDatabase db = getWritableDatabase();
@@ -93,6 +98,32 @@ public class OrderDbHelper extends SQLiteOpenHelper {
 
         db.close();
 
+    }
+
+
+    /**
+     * 获取所有信息
+     */
+    @SuppressLint("Range")
+    public List<OrderInfo> findAll(String username) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<OrderInfo> list = new ArrayList<>();
+        String sql = "select order_id,username,product_img,product_title,product_price,product_count, address, mobile  from order_table where username = ?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            int order_id = cursor.getInt(cursor.getColumnIndex("order_id"));
+            int product_img = cursor.getInt(cursor.getColumnIndex("product_img"));
+            String product_title = cursor.getString(cursor.getColumnIndex("product_title"));
+            int product_price = cursor.getInt(cursor.getColumnIndex("product_price"));
+            int product_count = cursor.getInt(cursor.getColumnIndex("product_count"));
+            String address = cursor.getString(cursor.getColumnIndex("address"));
+            String mobile = cursor.getString(cursor.getColumnIndex("mobile"));
+            list.add(new OrderInfo(order_id, username, product_img, product_title, product_price, product_count, address, mobile));
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
 
 }

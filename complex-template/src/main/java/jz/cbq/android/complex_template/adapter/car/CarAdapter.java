@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * CarAdapter
+ * 购物车 Adapter
  *
  * @author CBQ
  * @date 2023/11/7 17:47

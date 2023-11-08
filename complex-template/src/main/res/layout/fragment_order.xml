@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-             tools:context=".fragment.OrderFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                tools:context=".fragment.OrderFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/order"
-            app:titleTextColor="@color/white"
-            android:background="@color/my_light_primary"/>
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/order"
+                app:titleTextColor="@color/white"
+                android:background="@color/my_light_primary"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_fragment_recycleView"
+                tools:listitem="@layout/order_list_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</FrameLayout>
+
+
+</RelativeLayout>

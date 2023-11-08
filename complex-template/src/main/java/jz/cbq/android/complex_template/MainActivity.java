@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.add(R.id.main_activity_content, order);
             } else {
                 transaction.show(order);
+                order.loadData();
             }
         } else {
             if (mine == null) {

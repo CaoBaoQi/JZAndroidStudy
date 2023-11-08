@@ -94,12 +94,14 @@ public class CarFragment extends Fragment {
 
             if (userInfo != null) {
                 List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).findAll(userInfo.getUsername());
-                OrderDbHelper.getInstance(getActivity()).insertByAll(carInfoList, "文华街 199 号", "19510201902");
-
-                carInfoList.forEach(carInfo -> CarDbHelper.getInstance(getActivity()).delete(carInfo.getCar_id() + ""));
+                if (carInfoList.size() == 0){
+                    Toast.makeText(getActivity(), "当前购物车为空", Toast.LENGTH_SHORT).show();
+                }else {
+                    OrderDbHelper.getInstance(getActivity()).insertByAll(carInfoList, "文华街 199 号", "19510201902");
+                    carInfoList.forEach(carInfo -> CarDbHelper.getInstance(getActivity()).delete(carInfo.getCar_id() + ""));
+                    loadData();
+                }
             }
-            loadData();
-
         });
 
         loadData();
