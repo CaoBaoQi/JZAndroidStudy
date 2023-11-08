@@ -126,4 +126,13 @@ public class OrderDbHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    /**
+     * 根据 order_id 删除
+     */
+    public int delete(String order_id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int delete = db.delete("order_table", " order_id=?", new String[]{order_id});
+        db.close();
+        return delete;
+    }
 }

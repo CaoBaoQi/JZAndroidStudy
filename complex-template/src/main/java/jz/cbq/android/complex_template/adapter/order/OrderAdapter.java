@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
+import jz.cbq.android.complex_template.adapter.car.CarAdapter;
+import jz.cbq.android.complex_template.entity.CarInfo;
 import jz.cbq.android.complex_template.entity.OrderInfo;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,11 +25,17 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
     private List<OrderInfo> dataList;
 
+    private OrderAdapter.OrderAdapterOnItemClickListener orderAdapterOnItemClickListener;
+
+
     public void setDataList(List<OrderInfo> dataList) {
         this.dataList = dataList;
         notifyDataSetChanged();
     }
 
+    public void setOrderAdapterOnItemClickListener(OrderAdapterOnItemClickListener orderAdapterOnItemClickListener) {
+        this.orderAdapterOnItemClickListener = orderAdapterOnItemClickListener;
+    }
 
     @NonNull
     @NotNull
@@ -48,7 +56,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
         holder.product_price.setText(orderInfo.getProduct_price() + "");
         holder.product_count.setText("x " + orderInfo.getProduct_count());
 
-
+        holder.itemView.setOnLongClickListener(v -> {
+            if (orderAdapterOnItemClickListener != null) {
+                orderAdapterOnItemClickListener.deleteOnClick(orderInfo, position);
+            }
+            return true;
+        });
     }
 
     @Override
@@ -72,4 +85,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
         }
     }
 
+    public interface OrderAdapterOnItemClickListener {
+        void deleteOnClick(OrderInfo orderInfo, int position);
+    }
 }

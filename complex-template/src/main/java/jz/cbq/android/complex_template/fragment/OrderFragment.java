@@ -1,6 +1,8 @@
 package jz.cbq.android.complex_template.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 import jz.cbq.android.complex_template.R;
-import jz.cbq.android.complex_template.adapter.car.CarAdapter;
 import jz.cbq.android.complex_template.adapter.order.OrderAdapter;
-import jz.cbq.android.complex_template.db.CarDbHelper;
 import jz.cbq.android.complex_template.db.OrderDbHelper;
-import jz.cbq.android.complex_template.entity.CarInfo;
 import jz.cbq.android.complex_template.entity.OrderInfo;
 import jz.cbq.android.complex_template.entity.UserInfo;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +48,18 @@ public class OrderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         orderAdapter = new OrderAdapter();
         recyclerView.setAdapter(orderAdapter);
+
+        orderAdapter.setOrderAdapterOnItemClickListener((orderInfo, position) -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            builder.setTitle("确定删除吗？")
+                    .setPositiveButton("确认", (dialog, which) -> {
+                        OrderDbHelper.getInstance(getActivity()).delete(orderInfo.getOrder_id() + "");
+                        loadData();
+                    })
+                    .setNegativeButton("取消", (dialog, which) -> Toast.makeText(getActivity(), "取消删除", Toast.LENGTH_SHORT).show()).create().show();
+        });
 
         loadData();
 

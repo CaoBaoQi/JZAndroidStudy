@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * OrderInfo
+ * 商品信息
  *
  * @author CBQ
  * @date 2023/11/8 13:55

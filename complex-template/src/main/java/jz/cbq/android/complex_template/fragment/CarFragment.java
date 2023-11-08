@@ -82,10 +82,7 @@ public class CarFragment extends Fragment {
                             CarDbHelper.getInstance(getActivity()).delete(carInfo.getCar_id() + "");
                             loadData();
                         })
-                        .setNegativeButton("取消", (dialog, which) -> {
-                            Toast.makeText(getActivity(), "取消删除", Toast.LENGTH_SHORT).show();
-                        }).create().show();
-
+                        .setNegativeButton("取消", (dialog, which) -> Toast.makeText(getActivity(), "取消删除", Toast.LENGTH_SHORT).show()).create().show();
             }
         });
 
