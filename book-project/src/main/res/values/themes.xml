@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.JZAndroidStudy" parent="Base.Theme.JZAndroidStudy"/>
+    <style name="MaterialComponents_Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary_color</item>
+    </style>
+
 </resources>
