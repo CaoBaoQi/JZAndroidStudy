@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "JZAndroidStudy"
 include ':app'
 include ':complex-template'
+include ':book-project'
