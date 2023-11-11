@@ -52,6 +52,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
                 "email text," +
                 "password text" +
                 ")");
+        db.execSQL("insert into user_table values(null,'cbq','cbq','1203952894@qq.com','cb')");
     }
 
     @Override
@@ -83,14 +84,14 @@ public class UserDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * 登录  根据用户名或邮箱查找用户
+     * 根据用户名或邮箱查找用户
      */
     @SuppressLint("Range")
     public UserInfo loadUserInfoByEmailOrUsername(String text) {
         SQLiteDatabase db = getReadableDatabase();
         UserInfo userInfo = null;
         String sql = "select user_id,username,nickname,email,password from user_table where username=? or email=?";
-        String[] selectionArgs = {text};
+        String[] selectionArgs = {text, text};
         Cursor cursor = db.rawQuery(sql, selectionArgs);
         if (cursor.moveToNext()) {
             int user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
@@ -98,7 +99,7 @@ public class UserDbHelper extends SQLiteOpenHelper {
             String nickname = cursor.getString(cursor.getColumnIndex("nickname"));
             String email = cursor.getString(cursor.getColumnIndex("email"));
             String password = cursor.getString(cursor.getColumnIndex("password"));
-            userInfo = new UserInfo(user_id, username, nickname,email, password);
+            userInfo = new UserInfo(user_id, username, nickname, email, password);
         }
         cursor.close();
         db.close();

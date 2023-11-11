@@ -58,7 +58,32 @@
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/et_bg"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_height="50dp">
 
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/email"/>
+
+            <EditText
+                    android:id="@+id/register_activity_et_email"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:hint="@string/input_email"
+                    android:textSize="14sp"
+                    android:background="@null" android:autofillHints="" android:inputType="textEmailAddress"
+                    tools:ignore="TextFields"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -111,32 +136,7 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:background="@drawable/et_bg"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_height="50dp">
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/email"/>
-
-            <EditText
-                    android:id="@+id/register_activity_et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:hint="@string/input_email"
-                    android:textSize="14sp"
-                    android:background="@null" android:autofillHints="" android:inputType="textPassword"
-                    tools:ignore="TextFields"/>
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
         <Button
                 android:id="@+id/register_activity_btn_register"
                 android:layout_marginTop="20dp"

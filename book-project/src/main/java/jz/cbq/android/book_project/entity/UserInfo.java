@@ -1,8 +1,6 @@
 package jz.cbq.android.book_project.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * UserInfo
@@ -35,5 +33,9 @@ public class UserInfo {
      * password
      */
     private String password;
+
+    @Getter
+    @Setter
+    public static UserInfo CurrentUserInfo;
 
 }

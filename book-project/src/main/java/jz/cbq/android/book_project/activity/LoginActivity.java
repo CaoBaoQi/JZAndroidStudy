@@ -1,28 +1,84 @@
 package jz.cbq.android.book_project.activity;
 
 import android.content.Intent;
-import android.widget.Button;
-import android.widget.TextView;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import jz.cbq.android.book_project.MainActivity;
 import jz.cbq.android.book_project.R;
+import jz.cbq.android.book_project.db.UserDbHelper;
+import jz.cbq.android.book_project.entity.UserInfo;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView register;
-    private Button login;
-
+    private EditText et_username, et_pwd;
+    private SharedPreferences shared;
+    private boolean is_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        register = findViewById(R.id.login_activity_tx_register);
-        login = findViewById(R.id.login_activity_btn_login);
+        shared = getSharedPreferences("user", MODE_PRIVATE);
+        CheckBox cb_save_pwd = findViewById(R.id.login_activity_cb_save_pwd);
 
-        register.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
-        login.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MainActivity.class)));
+        et_username = findViewById(R.id.login_activity_et_username);
+        et_pwd = findViewById(R.id.login_activity_et_pwd);
 
+        TextView tx_register = findViewById(R.id.login_activity_tx_register);
+        Button btn_login = findViewById(R.id.login_activity_btn_login);
+
+        is_login = shared.getBoolean("is_login", false);
+
+        if (is_login) {
+            String username = shared.getString("username", "cbq");
+            String pwd = shared.getString("pwd", "cb");
+            et_username.setText(username);
+            et_pwd.setText(pwd);
+            cb_save_pwd.setChecked(true);
+        }
+
+        tx_register.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        btn_login.setOnClickListener(this::validateForm);
+        cb_save_pwd.setOnCheckedChangeListener((buttonView, isChecked) -> is_login = isChecked);
     }
+
+    /**
+     * 校验登录表单
+     *
+     * @param v view
+     */
+    private void validateForm(View v) {
+        String username = et_username.getText().toString();
+        String pwd = et_pwd.getText().toString();
+
+        if (TextUtils.isEmpty(username) && TextUtils.isEmpty(pwd)) {
+            Toast.makeText(this, "请输入用户名或密码", Toast.LENGTH_SHORT).show();
+        } else {
+            UserInfo userInfo = UserDbHelper.getInstance(LoginActivity.this).loadUserInfoByEmailOrUsername(username);
+            if (!(userInfo == null)) {
+                if ((username.equals(userInfo.getUsername()) || username.equals(userInfo.getEmail())) && pwd.equals(userInfo.getPassword())) {
+
+                    SharedPreferences.Editor editor = shared.edit();
+                    editor.putBoolean("is_login", is_login);
+                    editor.putString("username", username);
+                    editor.putString("pwd", pwd);
+                    editor.apply();
+
+                    UserInfo.setCurrentUserInfo(userInfo);
+
+                    Toast.makeText(this, "登录成功,欢迎您 " + userInfo.getUsername(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "未注册", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

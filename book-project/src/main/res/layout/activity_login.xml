@@ -54,7 +54,7 @@
                     android:layout_marginStart="10dp"
                     android:hint="@string/input_username"
                     android:textSize="14sp"
-                    android:background="@null" android:autofillHints="" android:inputType="textAutoComplete"/>
+                    android:background="@null" android:autofillHints="" android:inputType="textEmailAddress|text"/>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
